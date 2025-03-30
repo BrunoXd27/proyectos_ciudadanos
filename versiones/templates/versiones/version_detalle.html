@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle Versión{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+	{% if user.is_authenticated %}
+	<h2>{{ version.cambioPropuesta }}</h2>
+	<p>{{ version.contenido }}</p>
+	<p>Precediente de: 
+		{% if origen_tipo == 'version' %}
+			<a href="{% url 'versiones:version_detalle' origen.id %}">{{ origen.cambioPropuesta }}</a> (Versión)
+		{% else %}
+			<a href="{% url 'propuestas:propuesta_detalle' origen.id %}">{{ origen.titulo }}</a> (Propuesta)
+		{% endif %}
+	</p>
+	<p>Votos: {{ version.votos }}</p>
+	<p>Creada por: {{ version.usuario.username }}</p>
+	<p>Fecha de creación: {{ version.fechaCreacion }}</p>
+
+	{% if not ya_voto %}
+	<a href="{% url 'votos:voto_version' version.id %}">
+		<button>Votar por esta versión</button>
+	</a>
+	{% else %}
+	<p>Ya has votado por esta versión.</p>
+	{% endif %}
+
+	<h3>Versiones</h3>
+	<a href="{% url 'versiones:crear_version_desde_version' version.id%}">
+		<button>Crear Versión</button>
+	</a>
+	{% include 'includes/versiones.html' %}
+
+	{% comment %}
+	<h3>Agregar un comentario</h3>
+	<form method="post" action="{% url 'propuestas:propuesta_version_detalle_comentario' propuesta.id %}">
+		{% csrf_token %} {{ form.as_p }}
+		<button type="submit">Enviar comentario</button>
+	</form>
+	<h3>Comentarios</h3>
+	{% include 'propuestas/includes/comentarios.html' %}
+	
+	<h3>Versiones</h3>
+	<a href="{% url 'propuestas:propuesta_crear_version' propuesta.id%}">
+		<button>Crear Versión</button>
+	</a>
+	{% include 'propuestas/includes/versiones.html' %}
+	 {% endcomment %}
+	{% else %}
+	<div class="alert alert-warning" role="alert">Debes estar autenticado.</div>
+	{% endif %}
+</div>
+{% endblock %}

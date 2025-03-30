@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Proyectos Ciudadanos{% endblock %}
+
+{% block content %}
+<h1>Bienvenido a nuestra aplicación</h1>
+<p>Por favor, elige una opción:</p>
+<button onclick="window.location.href='{% url "home:login" %}'">Iniciar sesión</button>
+<button onclick="window.location.href='{% url "home:signup" %}'">Crear cuenta</button>
+{% endblock %}

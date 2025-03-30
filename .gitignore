@@ -1,0 +1,36 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+
+# Environment variables file
+.env
+
+# Django database
+db.sqlite3
+
+# Log files
+*.log
+
+# Local settings (if you have local settings for development)
+local_settings.py
+
+# Virtualenv folder (use the appropriate name for your virtual environment folder)
+venv/
+.env/
+env/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Other unwanted files
+*.bak
+*.tmp
+
+# Media files (if you don't want to push your media files to Git)
+media/

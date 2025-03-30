@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Propuestas{% endblock %}
+
+{% block content %}
+<h1>Lista de Propuestas</h1>
+<a href="{% url 'propuestas:crear_propuesta' %}">
+    <button>Crear Propuesta</button>
+</a>
+<ul>
+    {% for propuesta in propuestas %}
+    <li>
+        <h2>{{ propuesta.titulo }}</h2>
+        <p>{{ propuesta.descripcion }}</p>
+        <p>Categoría: {{ propuesta.categoria }}</p>
+        <p>Votos: {{ propuesta.votos }}</p>
+        <p>Creada por: {{ propuesta.usuario }}</p>
+        <p>Fecha de creación: {{ propuesta.fechaCreacion }}</p>
+        <a href="{% url 'propuestas:propuesta_detalle' propuesta.id %}">Ver Propuesta</a>
+    </li>
+    {% empty %}
+    <li>No hay propuestas disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

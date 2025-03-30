@@ -1,0 +1,11 @@
+<ul>
+    {% for comentario in propuesta.comentarios.all %}
+    <li>
+        <p>{{ comentario.usuario.username }}</p>
+        <p>{{ comentario.contenido }}</p>
+        <p>Fecha de creación: {{ comentario.fechaCreacion }}</p>
+    </li>
+    {% empty %}
+    <li>No hay comentarios aún.</li>
+    {% endfor %}
+</ul>

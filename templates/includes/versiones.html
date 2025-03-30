@@ -1,0 +1,25 @@
+<ul>
+    {% if propuesta.versiones.exists %}
+        {% for version in propuesta.versiones.all %}
+        <li>
+            <p>{{ version.cambioPropuesta }}</p>
+            <p>{{ version.usuario.username }}</p>
+            <p>{{ version.contenido }}</p>
+            <p>Fecha de creación: {{ version.fechaCreacion }}</p>
+            <a href="{% url 'versiones:version_detalle' version.id %}">Ver Versión</a>
+        </li>
+        {% endfor %}
+    {% elif version.sub_versions.exists %}
+        {% for sub_version in version.sub_versions.all %}
+        <li>
+            <p>{{ sub_version.cambioPropuesta }}</p>
+            <p>{{ sub_version.usuario.username }}</p>
+            <p>{{ sub_version.contenido }}</p>
+            <p>Fecha de creación: {{ sub_version.fechaCreacion }}</p>
+            <a href="{% url 'versiones:version_detalle' sub_version.id %}">Ver Sub-Versión</a>
+        </li>
+        {% endfor %}
+    {% else %}
+        <li>No hay versiones aún.</li>
+    {% endif %}
+</ul>

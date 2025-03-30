@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle Propuesta{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+	{% if user.is_authenticated %}
+	<h2>{{ propuesta.titulo }}</h2>
+	<p>{{ propuesta.descripcion }}</p>
+	<p>Categoría: {{ propuesta.categoria }}</p>
+	<p>Votos: {{ propuesta.votos }}</p>
+	<p>Creada por: {{ propuesta.usuario }}</p>
+	<p>Fecha de creación: {{ propuesta.fechaCreacion }}</p>
+
+	{% if not ya_voto %}
+	<a href="{% url 'votos:voto_propuesta' propuesta.id %}">
+		<button>Votar por esta propuesta</button>
+	</a>
+	{% else %}
+	<p>Ya has votado por esta propuesta.</p>
+	{% endif %}
+
+	<h3>Versiones</h3>
+	<a href="{% url 'versiones:crear_version_desde_propuesta' propuesta.id%}">
+		<button>Crear Versión</button>
+	</a>
+	{% include 'includes/versiones.html' %} 
+
+	{% comment %}
+	
+	<h3>Agregar un comentario</h3>
+	<form method="post" action="{% url 'propuestas:propuesta_detalle_comentario' propuesta.id %}">
+		{% csrf_token %} {{ form.as_p }}
+		<button type="submit">Enviar comentario</button>
+	</form>
+	<h3>Comentarios</h3>
+	{% include 'propuestas/includes/comentarios.html' %}
+	
+	
+	{% endcomment %}
+	
+	{% else %}
+	<div class="alert alert-warning" role="alert">Debes estar autenticado.</div>
+	{% endif %}
+</div>
+{% endblock %}

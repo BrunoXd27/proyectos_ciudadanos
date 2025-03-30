@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Propuesta{% endblock %}
+
+{% block content %}
+<h2>Crear Propuesta</h2>
+<div class="container mt-5">
+	{% if user.is_authenticated %}
+	<form method="post">
+		{% csrf_token %} {{ form.as_p }}
+		<button type="submit" class="btn btn-primary">Crear Propuesta</button>
+	</form>
+	{% else %}
+	<div class="alert alert-warning" role="alert">Debes estar autenticado para crear una propuesta.</div>
+	{% endif %}
+</div>
+{% endblock %}

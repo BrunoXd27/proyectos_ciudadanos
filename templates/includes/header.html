@@ -1,0 +1,10 @@
+<header>
+    <h1>Proyectos Ciudadanos</h1>
+    {% if user.is_authenticated %}
+    <a href="{% url 'home:logout' %}">
+        <button>Logout</button>
+    </a>
+    {% else %}
+    <p></p>
+    {% endif %}
+</header>
