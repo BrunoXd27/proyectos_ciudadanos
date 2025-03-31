@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.views import View, generic
 from django.urls import reverse
 from django.db.models import F ##F es para hacer queries atomicas, como "UPDATE table SET column = column + 1"
