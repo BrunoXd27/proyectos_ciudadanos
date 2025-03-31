@@ -16,4 +16,4 @@ class Version(models.Model):
     parent_version = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='sub_versions')
 
     def __str__(self):
-        return f"{self.cambioPropuesta} (ID: {self.id})"
+        return f"{self.cambioPropuesta}"

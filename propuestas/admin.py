@@ -1,32 +1,12 @@
 from django.contrib import admin
 
 from .models import Propuesta, Categoria
+from versiones.models import Version
 
 # Register your models here.
 
-# class VersionesInLine(admin.TabularInline): ##TabularInline es para mostrar los objetos en forma de tabla, es decir, uno al lado del otro
-#     model = Version
-
-# class VersionAdmin(admin.ModelAdmin):
-#     fieldsets = [
-#         ("Text", {"fields": ["cambioPropuesta", "contenido", "usuario", "propuesta"]}),
-#     ]
-
-#     list_display = ('cambioPropuesta', 'contenido', 'fechaCreacion', 'usuario', 'propuesta')
-#     search_fields = ('cambioPropuesta', 'contenido', 'usuario', 'propuesta')
-#     list_filter = ('usuario', 'propuesta', 'fechaCreacion')
-
-# class ComentariosInLine(admin.TabularInline):
-#     model = Comentario
-
-# class ComentarioAdmin(admin.ModelAdmin):
-#     fieldsets = [
-#         ("Text", {"fields": ["contenido", "usuario", "propuesta"]}),
-#     ]
-
-#     list_display = ('contenido', 'fechaCreacion', 'usuario', 'propuesta')
-#     search_fields = ('contenido', 'usuario', 'propuesta')
-#     list_filter = ('usuario', 'propuesta', 'fechaCreacion')
+class VersionesInLine(admin.TabularInline): ##TabularInline es para mostrar los objetos en forma de tabla, es decir, uno al lado del otro
+    model = Version
 
 class CategoriaAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -37,11 +17,11 @@ class PropuestaAdmin(admin.ModelAdmin):
     fieldsets = [
         ("Text", {"fields": ["titulo", "descripcion", "usuario", "categoria"]}),
         ("Status", {"fields": ["estado"]}),
+        ("Votes", {"fields": ["votos"]}),
     ]
 
-    # inlines = [VersionesInLine]
-    # inlines = [ComentariosInLine, VersionesInLine]
-    list_display = ('titulo', 'fechaCreacion', 'estado', 'usuario')
+    inlines = [VersionesInLine]
+    list_display = ('titulo', 'fechaCreacion', 'estado', 'usuario', 'categoria', 'votos')
     search_fields = ('titulo', 'descripcion', 'usuario')
     list_filter = ('estado', 'categoria', 'usuario', 'fechaCreacion')
 
