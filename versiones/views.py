@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views import generic
+from django.contrib.contenttypes.models import ContentType
 
 from .models import Version
 from propuestas.models import Propuesta
 from votos.models import Voto_Version
+from comentarios.models import Comentario
 from .forms import Version_Form
 
 # Create your views here.
@@ -94,5 +96,10 @@ class Version_Detalle(generic.DetailView):
         ya_voto = Voto_Version.objects.filter(version=version, usuario=user).exists()
         context['ya_voto'] = ya_voto  # Agregar al contexto
 
+        # Obtener los comentarios principales (sin padre) relacionados con la propuesta
+        content_type = ContentType.objects.get_for_model(Version)
+        comentarios = Comentario.objects.filter(content_type=content_type, object_id=version.id, parent=None)
+
+        context['comentarios'] = comentarios  # Agregar los comentarios al contexto
         return context
     

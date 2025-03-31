@@ -7,9 +7,3 @@ class PropuestaForm(forms.ModelForm):
     class Meta:
         model = Propuesta
         fields = ['titulo', 'descripcion', 'categoria']
-
-# class ComentarioForm(forms.ModelForm):
-#     class Meta:
-#         model = Comentario
-#         fields = ['contenido']
-

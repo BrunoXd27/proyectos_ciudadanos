@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'versiones.apps.VersionesConfig',
     'votos.apps.VotosConfig',
+    'comentarios.apps.ComentariosConfig',
 ]
 
 MIDDLEWARE = [

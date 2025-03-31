@@ -2,10 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View, generic
 from django.urls import reverse
 from django.db.models import F ##F es para hacer queries atomicas, como "UPDATE table SET column = column + 1"
+from django.contrib.contenttypes.models import ContentType
 
 from .models import Propuesta
 from votos.models import Voto_Propuesta
+from comentarios.models import Comentario
 from .forms import PropuestaForm
+
 # Create your views here.
 
 class Propuestas_Listado(generic.ListView):
@@ -57,4 +60,9 @@ class Propuesta_Detalle(generic.DetailView):
         ya_voto = Voto_Propuesta.objects.filter(propuesta=propuesta, usuario=user).exists()
         context['ya_voto'] = ya_voto  # Agregar al contexto
 
+        # Obtener los comentarios principales (sin padre) relacionados con la propuesta
+        content_type = ContentType.objects.get_for_model(Propuesta)
+        comentarios = Comentario.objects.filter(content_type=content_type, object_id=propuesta.id, parent=None)
+
+        context['comentarios'] = comentarios  # Agregar los comentarios al contexto
         return context

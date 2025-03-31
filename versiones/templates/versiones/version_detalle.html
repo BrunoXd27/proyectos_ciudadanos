@@ -32,21 +32,15 @@
 	</a>
 	{% include 'includes/versiones.html' %}
 
-	{% comment %}
 	<h3>Agregar un comentario</h3>
-	<form method="post" action="{% url 'propuestas:propuesta_version_detalle_comentario' propuesta.id %}">
-		{% csrf_token %} {{ form.as_p }}
+	<form method="post" action="{% url 'comentarios:crear_comentario_version' version.id %}">
+		{% csrf_token %} 
+		<textarea name="contenido" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
 		<button type="submit">Enviar comentario</button>
 	</form>
 	<h3>Comentarios</h3>
-	{% include 'propuestas/includes/comentarios.html' %}
-	
-	<h3>Versiones</h3>
-	<a href="{% url 'propuestas:propuesta_crear_version' propuesta.id%}">
-		<button>Crear Versión</button>
-	</a>
-	{% include 'propuestas/includes/versiones.html' %}
-	 {% endcomment %}
+	{% include 'includes/comentarios.html' %}
+
 	{% else %}
 	<div class="alert alert-warning" role="alert">Debes estar autenticado.</div>
 	{% endif %}
