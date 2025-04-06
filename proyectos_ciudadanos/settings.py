@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'versiones.apps.VersionesConfig',
     'votos.apps.VotosConfig',
     'comentarios.apps.ComentariosConfig',
+     'bootstrap5',
 ]
 
 MIDDLEWARE = [
