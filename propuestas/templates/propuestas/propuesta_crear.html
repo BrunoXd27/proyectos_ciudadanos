@@ -1,17 +1,73 @@
+<!--HTML para crear propuesta-->
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 {% block title %}Crear Propuesta{% endblock %}
 
 {% block content %}
-<h2>Crear Propuesta</h2>
 <div class="container mt-5">
-	{% if user.is_authenticated %}
-	<form method="post">
-		{% csrf_token %} {{ form.as_p }}
-		<button type="submit" class="btn btn-primary">Crear Propuesta</button>
-	</form>
-	{% else %}
-	<div class="alert alert-warning" role="alert">Debes estar autenticado para crear una propuesta.</div>
-	{% endif %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h2 class="mb-0">Crear Propuesta</h2>
+                </div>
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                        <form method="post" class="form needs-validation" novalidate id="propuestaForm">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-success btn-lg" id="submitBtn">
+                                    <i class="bi bi-plus-circle me-2"></i>Crear Propuesta
+                                </button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <div class="alert alert-warning" role="alert">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Debes estar autenticado para crear una propuesta.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Agregar este script al final del bloque content -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('propuestaForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Validación en tiempo real
+    form.querySelectorAll('input, textarea').forEach(input => {
+        input.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+            
+            // Validación específica para cada campo
+            if (this.value.trim() === '') {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+            }
+        });
+    });
+
+    // Manejo del envío del formulario
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        
+        form.classList.add('was-validated');
+        
+        // Deshabilitar el botón durante el envío
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Enviando...';
+    });
+});
+</script>
 {% endblock %}

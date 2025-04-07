@@ -1,14 +1,79 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="login-container">
-	<h1>Login</h1>
-	<form method="post">
-		{% csrf_token %} {{ form.as_p }}
-		<button type="submit" class="btn-submit">Log In</button>
-	</form>
-	<p>Don't have an account? <a href="{% url 'home:signup' %}">Sign up here</a>.</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white text-center">
+                    <h2 class="mb-0">Iniciar Sesión</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" class="needs-validation" novalidate id="loginForm">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg" id="submitBtn">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-4">
+                        <p class="mb-0">¿No tienes una cuenta? 
+                            <a href="{% url 'home:signup' %}" class="text-primary">Regístrate aquí</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('loginForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Validación en tiempo real
+    form.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', function() {
+            validateField(this);
+        });
+    });
+
+    function validateField(field) {
+        if (field.value.trim() === '') {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            return false;
+        } else {
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            return true;
+        }
+    }
+
+    // Manejo del envío del formulario
+    form.addEventListener('submit', function(event) {
+        let isValid = true;
+        
+        form.querySelectorAll('input').forEach(input => {
+            if (!validateField(input)) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Ingresando...';
+        }
+    });
+});
+</script>
 {% endblock %}

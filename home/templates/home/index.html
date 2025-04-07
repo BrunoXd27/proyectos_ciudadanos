@@ -3,8 +3,25 @@
 {% block title %}Proyectos Ciudadanos{% endblock %}
 
 {% block content %}
-<h1>Bienvenido a nuestra aplicación</h1>
-<p>Por favor, elige una opción:</p>
-<button onclick="window.location.href='{% url "home:login" %}'">Iniciar sesión</button>
-<button onclick="window.location.href='{% url "home:signup" %}'">Crear cuenta</button>
+<div class="citizen-section">
+    <div class="container parallax-content">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center text-white">
+                    <h1 class="display-4 mb-4 text-shadow">Bienvenido a Proyectos Ciudadanos</h1>
+                    <p class="lead mb-4 text-shadow">Una plataforma para impulsar iniciativas que mejoran tu comunidad</p>
+                    
+                    <div class="d-grid gap-3 d-md-block">
+                        <a href="{% url 'home:login' %}" class="btn btn-light btn-lg me-md-2">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar sesión
+                        </a>
+                        <a href="{% url 'home:signup' %}" class="btn btn-success btn-lg">
+                            <i class="bi bi-person-plus me-2"></i>Crear cuenta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'versiones.apps.VersionesConfig',
     'votos.apps.VotosConfig',
     'comentarios.apps.ComentariosConfig',
-     'bootstrap5',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +131,11 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
