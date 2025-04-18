@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.contrib.auth import login, logout, authenticate
 from django.views import View
+from propuestas.models import Propuesta
 
 # Create your views here.
 def index(request):
@@ -54,3 +55,9 @@ class Logout_View(View):
         if request.user.is_authenticated:
             logout(request)
         return redirect('home:index')
+
+# Vista para manejar la búsqueda de propuestas
+def search(request):
+    query = request.GET.get('q', '')  # Obtén el término de búsqueda desde el formulario
+    results = Propuesta.objects.filter(titulo__icontains=query)  # Filtra las propuestas por titulo
+    return render(request, 'home/search_results.html', {'query': query, 'results': results})
