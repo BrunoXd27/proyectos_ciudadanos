@@ -1,0 +1,31 @@
+<ul>
+    {% for comentario in comentarios %}
+    <li>
+        <p>{{ comentario.usuario.username }}</p>
+        <p>{{ comentario.contenido }}</p>
+        <p>Fecha de creación: {{ comentario.fecha_creacion }}</p>
+
+        <button class="btn-responder btn btn-outline-success mb-3 shadow mt-2" onclick="mostrarFormularioRespuesta({{ comentario.id }})">Responder</button>
+        <div id="formulario-respuesta-{{ comentario.id }}" style="display: none;">
+            <form method="post" action="{% url 'comentarios:responder_comentario' comentario.id %}">
+                {% csrf_token %}
+                <textarea name="contenido" rows="3" placeholder="Escribe tu respuesta aquí..." required></textarea>
+                <button type="submit" class="btn btn-outline-success mb-3 shadow mt-2">Enviar</button>
+                <button type="button" onclick="ocultarFormularioRespuesta({{ comentario.id }})">Cancelar</button>
+            </form>
+        </div>
+
+        <script>
+            function mostrarFormularioRespuesta(comentarioId) {
+                document.getElementById(`formulario-respuesta-${comentarioId}`).style.display = 'block';
+            }
+
+            function ocultarFormularioRespuesta(comentarioId) {
+                document.getElementById(`formulario-respuesta-${comentarioId}`).style.display = 'none';
+            }
+        </script>
+    </li>
+    {% empty %}
+    <li>No hay comentarios aún.</li>
+    {% endfor %}
+</ul>
