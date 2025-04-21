@@ -1,0 +1,125 @@
+/* Estilos generales-hoja a modificar*/
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    margin-bottom: 0.5rem;
+    padding-bottom: 1rem 0;
+}
+
+main {
+    flex: 1;
+    padding: 2rem 0;
+    margin: 2rem auto;
+}
+
+footer {
+    margin-top: 2rem;
+    padding: 1rem 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Ajustes responsive */
+@media (max-width: 768px) {
+    main {
+        margin: 1rem auto;
+        padding: 1rem 0;
+    }
+    
+    header {
+        margin-bottom: 1rem;
+    }
+    
+    footer {
+        margin-top: 1rem;
+    }
+}
+/* Estilos para el formulario de propuesta */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0;
+    padding: 1.5rem;
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.btn-success {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.alert {
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+/*Estilos para el fondo en index*/
+.citizen-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/city.jpg');
+    background-size: cover;
+    background-position: center top; /* Asegura que la imagen se alinee desde arriba */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    min-height: 100vh; /* Cambiado para ocupar toda la altura */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea el contenido desde arriba */
+    padding-top: 100px; /* Ajusta según el tamaño de tu navbar */
+    margin-top: 1rem; /* Compensa el margin del header */
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-top: 2rem; /* Espacio adicional en la parte superior */
+}
+
+/* Ajuste para dispositivos móviles */
+@media (max-width: 768px) {
+    .citizen-section {
+        background-attachment: scroll;
+        padding-top: 60px; /* Menor padding en móviles */
+    }
+}

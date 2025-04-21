@@ -18,11 +18,10 @@
 <div class="container-fluid">
     <div class="d-grid gap-3">
         <div class="center">
-            <!-- Eliminé el ul y lo reemplacé por un div con row -->
             <div class="row gy-4">
                 {% for propuesta in propuestas %}
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3"> <!-- Ajusta estas clases según el número de columnas que necesites -->
-                    <div class="card-body shadow"> <!-- Cada propuesta como tarjeta -->
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card-body shadow"> 
                         <h2>{{ propuesta.titulo }}</h2>
                         <p>{{ propuesta.descripcion }}</p>
                         <p>Categoría: {{ propuesta.categoria }}</p>
