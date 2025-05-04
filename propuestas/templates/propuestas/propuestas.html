@@ -3,6 +3,7 @@
 {% block title %}Lista de Propuestas{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <h1>Lista de Propuestas</h1>
 <a href="{% url 'propuestas:crear_propuesta' %}">
     <button>Crear Propuesta</button>
@@ -22,4 +23,43 @@
     <li>No hay propuestas disponibles.</li>
     {% endfor %}
 </ul>
+=======
+<div class="container mt-5">
+	<div class="row">
+		<div class="gap-3">
+            <div class="card-header bg-success text-white">
+                <h1>Lista de Propuestas</h1>
+            </div>
+            <a href="{% url 'propuestas:crear_propuesta' %}">
+                <button class="btn btn-outline-success mb-3 shadow mt-2">Crear Propuesta</button>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="d-grid gap-3">
+        <div class="center">
+            <div class="row gy-4">
+                {% for propuesta in propuestas %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card-body shadow"> 
+                        <h2>{{ propuesta.titulo }}</h2>
+                        <p>{{ propuesta.descripcion }}</p>
+                        <p>Categoría: {{ propuesta.categoria }}</p>
+                        <p>Votos: {{ propuesta.votos }}</p>
+                        <p>Creada por: {{ propuesta.usuario }}</p>
+                        <p>Fecha de creación: {{ propuesta.fechaCreacion }}</p>
+                        <a href="{% url 'propuestas:propuesta_detalle' propuesta.id %}">Ver Propuesta</a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p>No hay propuestas disponibles.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+>>>>>>> master
 {% endblock %}

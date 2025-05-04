@@ -3,15 +3,19 @@
 {% block title %}Crear Versión{% endblock %}
 
 {% block content %}
-<h2>Crear Version</h2>
+<div class="card-header bg-success text-white">
+	<h2>Crear Version</h2>
+</div>
 <div class="container mt-5">
-	{% if user.is_authenticated %}
-	<form method="post">
-		{% csrf_token %} {{ form.as_p }}
-		<button type="submit" class="btn btn-primary">Crear version</button>
-	</form>
-	{% else %}
-	<div class="alert alert-warning" role="alert">Debes estar autenticado para crear una propuesta.</div>
-	{% endif %}
-			</div>
+	<div class="row">
+		{% if user.is_authenticated %}
+		<form method="post">
+			{% csrf_token %} {{ form.as_p }}
+			<button type="submit" class="btn btn-outline-success mb-3 shadow">Crear version</button>
+		</form>
+		{% else %}
+			<div class="alert alert-warning" role="alert">Debes estar autenticado para crear una propuesta.</div>
+		{% endif %}
+	</div>
+</div>
 {% endblock %}

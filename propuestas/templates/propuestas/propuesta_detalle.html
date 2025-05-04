@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container mt-5">
+<<<<<<< HEAD
 	{% if user.is_authenticated %}
 	<h2>{{ propuesta.titulo }}</h2>
 	<p>{{ propuesta.descripcion }}</p>
@@ -39,5 +40,65 @@
 	{% else %}
 	<div class="alert alert-warning" role="alert">Debes estar autenticado.</div>
 	{% endif %}
+=======
+	<div class="row justify-content-center">
+		<div class="col-md-8 gap-3">
+			<div class="card shadow mb-4 px-3">
+				{% if user.is_authenticated %}
+				<div class="card-header bg-success text-white">
+					<h2>{{ propuesta.titulo }}</h2>
+				</div>
+				<div class="card-body">
+					<p>{{ propuesta.descripcion }}</p>
+					<p>Categoría: {{ propuesta.categoria }}</p>
+					<p>Votos: {{ propuesta.votos }}</p>
+					<p>Creada por: {{ propuesta.usuario }}</p>
+					<p>Fecha de creación: {{ propuesta.fechaCreacion }}</p>
+				</div>
+				<div class="card-body">
+					{% if not ya_voto %}
+					<a href="{% url 'votos:voto_propuesta' propuesta.id %}">
+						<button class="btn btn-outline-success mb-3 shadow mt-2">Votar por esta propuesta</button>
+					</a>
+			
+					{% else %}
+					<p>Ya has votado por esta propuesta.</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="card shadow mb-4 px-3 ">
+				<div class="p-2 bg-success text-white">
+					<h3>Versiones</h3>
+				</div>
+				<a href="{% url 'versiones:crear_version_desde_propuesta' propuesta.id%}">
+					<button class="btn btn-outline-success mb-3 shadow mt-2">Crear Versión</button>
+				</a>
+				{% include 'includes/versiones.html' %} 
+			</div>
+			<div class="card shadow mb-4 px-3">
+				<div class="p-2 bg-success text-white">
+					<h3>Agregar un comentario</h3>
+				</div>
+
+				<form method="post" action="{% url 'comentarios:crear_comentario_propuesta' propuesta.id %}">
+					{% csrf_token %} 
+					<textarea name="contenido" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
+					<button type="submit" class="btn btn-outline-success mb-3 shadow mt-2">Enviar comentario</button>
+				</form>
+			</div>
+			<div class="card shadow mb-4 px-3">
+				<div class="p-2 bg-success text-white mb-2">
+					<h3>Comentarios</h3>
+				</div>
+				{% include 'includes/comentarios.html' %}
+
+	
+				{% else %}
+				<div class="alert alert-warning" role="alert">Debes estar autenticado.</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+>>>>>>> master
 </div>
 {% endblock %}

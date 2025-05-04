@@ -1,7 +1,7 @@
 <ul>
     {% if propuesta.versiones.exists %}
         {% for version in propuesta.versiones.all %}
-        <li>
+        <li class="mb-3">
             <p>{{ version.cambioPropuesta }}</p>
             <p>{{ version.usuario.username }}</p>
             <p>{{ version.contenido }}</p>
@@ -11,7 +11,7 @@
         {% endfor %}
     {% elif version.sub_versions.exists %}
         {% for sub_version in version.sub_versions.all %}
-        <li>
+        <li class="mb-3">
             <p>{{ sub_version.cambioPropuesta }}</p>
             <p>{{ sub_version.usuario.username }}</p>
             <p>{{ sub_version.contenido }}</p>

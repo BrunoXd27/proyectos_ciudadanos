@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card-header bg-success text-white">
+	<h1>Resultados de búsqueda</h1>
+</div>
+<p>Resultado de buscar: <strong>{{ query }}</strong></p>
+
+{% if results %}
+    <ul>
+        {% for result in results %}
+            <li>
+                <a href="{% url 'propuestas:propuesta_detalle' result.id %}">{{ result.titulo }}</a> <!-- Ajusta según tu modelo -->
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron resultados.</p>
+{% endif %}
+{% endblock %}
