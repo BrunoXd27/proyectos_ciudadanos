@@ -33,7 +33,7 @@
 	{% include 'includes/versiones.html' %}
 
 	<h3>Agregar un comentario</h3>
-	<form method="post" action="{% url 'comentarios:crear_comentario_version' version.id %}">
+	<="post" action="{% url 'comentarios:crear_comentario_version' version.id %}">
 		{% csrf_token %} 
 		<textarea name="contenido" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
 		<button type="submit">Enviar comentario</button>
